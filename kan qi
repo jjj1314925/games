@@ -1,0 +1,63 @@
+
+
+# 导入random模块
+import random
+
+# 定义石头剪刀布的选项
+options = ["石头", "剪刀", "布"]
+
+# 设置初始用户和电脑的得分为0
+user_score = 0
+computer_score = 0
+
+# 设置游戏循环
+while True:
+    # 提示用户输入一个选项或退出
+    user_choice = input("请输入你的选择（石头、剪刀、布）或退出（q）：")
+
+    # 判断用户是否输入q
+    if user_choice == "q":
+        # 如果是，退出循环
+        break
+
+    # 判断用户是否输入有效的选项
+    if user_choice not in options:
+        # 如果不是，提示用户重新输入
+        print("你的输入无效，请重新输入。")
+        continue
+
+    # 随机生成电脑的选择
+    computer_choice = random.choice(options)
+
+    # 显示用户和电脑的选择
+    print(f"你的选择是{user_choice}，电脑的选择是{computer_choice}。")
+
+    # 判断用户和电脑的选择是否相同
+    if user_choice == computer_choice:
+        # 如果相同，显示平局，并增加双方的得分
+        print("平局！")
+        user_score += 1
+        computer_score += 1
+    elif (user_choice == "石头" and computer_choice == "剪刀") or (user_choice == "剪刀" and computer_choice == "布") or (user_choice == "布" and computer_choice == "石头"):
+        # 如果用户赢了，显示胜利，并增加用户的得分，减少电脑的得分
+        print("你赢了！")
+        user_score += 2
+        computer_score -= 1
+    else:
+        # 如果电脑赢了，显示失败，并增加电脑的得分，减少用户的得分
+        print("你输了！")
+        user_score -= 1
+        computer_score += 2
+
+    # 显示用户和电脑的得分
+    print(f"你的得分是{user_score}，电脑的得分是{computer_score}。")
+
+# 显示游戏结束和最终结果
+print("游戏结束！")
+if user_score > computer_score:
+    print(f"恭喜你，你最终赢了！你的得分是{user_score}，电脑的得分是{computer_score}。")
+elif user_score < computer_score:
+    print(f"很遗憾，你最终输了！你的得分是{user_score}，电脑的得分是{computer_score}。")
+else:
+    print(f"最终平局！你的得分是{user_score}，电脑的得分是{computer_score}。")
+```
