@@ -1,0 +1,69 @@
+
+# 导入random和time模块
+import random
+import time
+
+# 提示用户选择游戏难度
+difficulty = input("请选择游戏难度（简单、普通、困难）：")
+
+# 根据游戏难度设置答案范围和猜测次数限制
+if difficulty == "简单":
+    # 答案范围为1到10，猜测次数限制为5
+    lower = 1
+    upper = 10
+    limit = 5
+elif difficulty == "普通":
+    # 答案范围为1到100，猜测次数限制为10
+    lower = 1
+    upper = 100
+    limit = 10
+else:
+    # 答案范围为1到1000，猜测次数限制为15
+    lower = 1
+    upper = 1000
+    limit = 15
+
+# 生成一个指定范围内的随机整数
+answer = random.randint(lower, upper)
+
+# 设置初始猜测次数为0
+guesses = 0
+
+# 记录游戏开始的时间
+start_time = time.time()
+
+# 设置游戏循环
+while True:
+    # 提示用户输入一个数字，并显示剩余次数
+    guess = int(input(f"请输入一个{lower}到{upper}之间的数字，你还有{limit - guesses}次机会："))
+
+    # 增加猜测次数
+    guesses += 1
+
+    # 判断用户输入的数字是否等于答案
+    if guess == answer:
+        # 如果相等，恭喜用户并显示猜测次数，退出循环
+        print(f"恭喜你，你猜对了！你一共猜了{guesses}次。")
+        break
+    elif guess < answer:
+        # 如果小于答案，提示用户太小了，并判断是否超过次数限制
+        print("你猜的数字太小了。")
+        if guesses == limit:
+            # 如果超过次数限制，显示答案并结束游戏
+            print(f"很遗憾，你没有猜对。答案是{answer}。")
+            break
+    else:
+        # 如果大于答案，提示用户太大了，并判断是否超过次数限制
+        print("你猜的数字太大了。")
+        if guesses == limit:
+            # 如果超过次数限制，显示答案并结束游戏
+            print(f"很遗憾，你没有猜对。答案是{answer}。")
+            break
+
+# 记录游戏结束的时间
+end_time = time.time()
+
+# 计算游戏用时并显示
+duration = end_time - start_time
+print(f"你用了{duration:.2f}秒完成游戏。")
+```
